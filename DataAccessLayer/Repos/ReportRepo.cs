@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repos
 {
-    internal class ReportRepo
+    internal class ReportRepo : IReportRepo
     {
+
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    internal interface IVehicleRepo
+    public interface IVehicleRepo
     {
         bool Create(Vehicle v);
         List<Vehicle> Get();

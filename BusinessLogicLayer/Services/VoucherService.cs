@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Interfaces
+namespace BusinessLogicLayer.Services
 {
-    public interface IReportRepo
+    public class VoucherService
     {
 
     }

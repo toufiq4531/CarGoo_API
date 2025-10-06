@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    internal interface IVoucherRepo
+    public interface IVoucherRepo
     {
+
     }
 }

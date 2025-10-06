@@ -51,11 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccessFactory.cs" />
     <Compile Include="EF\RentalContext.cs" />
     <Compile Include="EF\Tables\Customer.cs" />
     <Compile Include="EF\Tables\Rental.cs" />
     <Compile Include="EF\Tables\Vehicle.cs" />
     <Compile Include="EF\Tables\Voucher.cs" />
+    <Compile Include="Interfaces\ICustomerRepo.cs" />
+    <Compile Include="Interfaces\IRentalRepo.cs" />
+    <Compile Include="Interfaces\IReportRepo.cs" />
+    <Compile Include="Interfaces\IVehicleRepo.cs" />
+    <Compile Include="Interfaces\IVoucherRepo.cs" />
     <Compile Include="Migrations\202510041628465_initDB.cs" />
     <Compile Include="Migrations\202510041628465_initDB.Designer.cs">
       <DependentUpon>202510041628465_initDB.cs</DependentUpon>
@@ -70,6 +76,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\CustomerRepo.cs" />
+    <Compile Include="Repos\RentalRepo.cs" />
+    <Compile Include="Repos\ReportRepo.cs" />
+    <Compile Include="Repos\VehicleRepo.cs" />
+    <Compile Include="Repos\VoucherRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
