@@ -74,6 +74,10 @@
     <Compile Include="Migrations\202510051919334_update_DB.Designer.cs">
       <DependentUpon>202510051919334_update_DB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202510061731508_voucher_table_seed.cs" />
+    <Compile Include="Migrations\202510061731508_voucher_table_seed.Designer.cs">
+      <DependentUpon>202510061731508_voucher_table_seed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\CustomerRepo.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202510051919334_update_DB.resx">
       <DependentUpon>202510051919334_update_DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510061731508_voucher_table_seed.resx">
+      <DependentUpon>202510061731508_voucher_table_seed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

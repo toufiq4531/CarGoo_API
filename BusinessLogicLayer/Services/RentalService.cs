@@ -29,11 +29,11 @@ namespace BusinessLogicLayer.Services
             var data = DataAccessFactory.RentalData().Get(id);
             return GetMapper().Map<RentalDTO>(data);
         }
-        public static bool Create(RentalDTO rental) 
-        {
-            var data = GetMapper().Map<Rental>(rental);
-            return DataAccessFactory.RentalData().Create(data);
-        }
+        //public static bool Create(RentalDTO rental) 
+        //{
+        //    var data = GetMapper().Map<Rental>(rental);
+        //    return DataAccessFactory.RentalData().Create(data);
+        //}
         public static bool Update(RentalDTO rental) 
         {
             var data = GetMapper().Map<Rental>(rental);
@@ -44,5 +44,90 @@ namespace BusinessLogicLayer.Services
             return DataAccessFactory.RentalData().Delete(id);
         }
 
+
+        public static double EstimateRentalCost(int VehicleId, DateTime Start, DateTime End)
+        {
+            var vehicle = DataAccessFactory.VehicleData().Get(VehicleId);
+
+            if (vehicle == null) 
+                return -1;
+            
+            int rentalDays = (End - Start).Days + 1;
+
+            if (rentalDays <= 0)
+                return -1;
+
+            double estimatedCost = rentalDays * vehicle.DailyRate;
+
+            if (rentalDays > 7)
+            {
+                estimatedCost *= 0.9;  // 10% discount
+            }
+            return estimatedCost;
+        }
+
+        public static double EstimateLateFee(int RentalId, DateTime ActualReturnDate)
+        {
+            var rental = DataAccessFactory.RentalData().Get(RentalId);
+
+            if (rental == null)
+                return -1;
+
+            if (ActualReturnDate <= rental.EndDate)
+                return 0;
+
+            int lateDays = (ActualReturnDate - rental.EndDate).Days;
+
+            var vehicle = DataAccessFactory.VehicleData().Get(rental.VehicleId);
+
+            if (vehicle == null)
+                return -1;
+
+            double lateFee = lateDays * vehicle.DailyRate * 1.5; // 50% more than daily rate
+
+            return lateFee;
+        }
+
+        public static bool Create(RentalDTO rental)
+        {
+            var data = GetMapper().Map<Rental>(rental);
+
+            var result = DataAccessFactory.RentalData().Create(data);
+
+            if (result)
+            {
+                try
+                {
+                    var customer = DataAccessFactory.CustomerData().Get(data.CustomerId);
+                    var vehicle = DataAccessFactory.VehicleData().Get(data.VehicleId);
+
+                    var emailService = new EmailService();
+
+                    string subject = $"Rental Confirmation #{data.Id}";
+                    string body = $@"
+                        <h2>Thank you for renting with us, {customer.Name}!</h2>
+                        <p><strong>Vehicle:</strong> {vehicle.Brand} {vehicle.Model} ({vehicle.Year})</p>
+                        <p><strong>Start Date:</strong> {data.StartDate:yyyy-MM-dd}</p>
+                        <p><strong>End Date:</strong> {data.EndDate:yyyy-MM-dd}</p>
+                        <p><strong>Original Cost:</strong> {data.OriginalCost} BDT</p>
+                        <p><strong>Discount:</strong> {data.DiscountAmount} BDT</p>
+                        <p><strong>Final Cost:</strong> {data.FinalCost} BDT</p>
+                        <br>
+                        <p>We hope you enjoy your ride!</p>
+                    ";
+
+                    bool sent = emailService.SendEmail(customer.Email, subject, body);
+
+                    data.EmailSent = sent;
+                    DataAccessFactory.RentalData().Update(data);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error while sending rental summary email: " + ex.Message);
+                }
+            }
+
+            return result;
+        }
     }
 }

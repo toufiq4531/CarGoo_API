@@ -44,7 +44,21 @@
             //    new EF.Tables.Voucher { Code = "SAVE500", DiscountAmount = 500, DiscountPercent = null, IsUsed = false },
             //    new EF.Tables.Voucher { Code = "PERCENT10", DiscountAmount = null, DiscountPercent = 10, IsUsed = false },
             //    new EF.Tables.Voucher { Code = "WELCOME25", DiscountAmount = 250, DiscountPercent = null, IsUsed = false },
-            //    new EF.Tables.Voucher { Code = "LOYAL20", DiscountAmount = null, DiscountPercent = 20, IsUsed = false }
+            //    new EF.Tables.Voucher { Code = "LOYAL20", DiscountAmount = null, DiscountPercent = 20, IsUsed = false },
+
+            //    new EF.Tables.Voucher { Code = "SAVE1000", DiscountAmount = 1000, DiscountPercent = null, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "OFF15", DiscountAmount = null, DiscountPercent = 15, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "FREE", DiscountAmount = null, DiscountPercent = 100, IsUsed = true }, // already used
+            //    new EF.Tables.Voucher { Code = "VIP30", DiscountAmount = null, DiscountPercent = 30, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "EARLY50", DiscountAmount = 50, DiscountPercent = null, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "WELCOME25", DiscountAmount = 250, DiscountPercent = null, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "LOYAL20", DiscountAmount = null, DiscountPercent = 20, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "PERCENT10", DiscountAmount = null, DiscountPercent = 10, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "SUMMER15", DiscountAmount = null, DiscountPercent = 15, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "RENT75", DiscountAmount = 75, DiscountPercent = null, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "SPRING5", DiscountAmount = null, DiscountPercent = 5, IsUsed = false },
+            //    new EF.Tables.Voucher { Code = "FIRSTRIDE", DiscountAmount = 300, DiscountPercent = null, IsUsed = false }
+
             //);
 
 
@@ -107,6 +121,130 @@
             //}
             //);
             //context.SaveChanges();
+
+            
+            // 4️⃣ Completed rental — long-term with 10% discount for >7 days
+            //new EF.Tables.Rental
+            //{
+            //    VehicleId = context.Vehicles.FirstOrDefault(v => v.Brand == "Ford").Id,
+            //    CustomerId = context.Customers.FirstOrDefault(c => c.Email == "emma@example.com").Id,
+            //    StartDate = new DateTime(2025, 07, 01),
+            //    EndDate = new DateTime(2025, 07, 10),
+            //    ReturnDate = new DateTime(2025, 07, 10),
+            //    OriginalCost = 400 * 9,
+            //    DiscountAmount = (400 * 9) * 0.10, // 10% long rent discount
+            //    LateFeeAmount = 0,
+            //    FinalCost = (400 * 9) - ((400 * 9) * 0.10),
+            //    Status = "completed",
+            //    VoucherId = null,
+            //    EmailSent = true
+            //},
+
+            //// 5️⃣ Active rental (still ongoing)
+            //new EF.Tables.Rental
+            //{
+            //    VehicleId = context.Vehicles.FirstOrDefault(v => v.Brand == "Tesla").Id,
+            //    CustomerId = context.Customers.FirstOrDefault(c => c.Email == "david@example.com").Id,
+            //    StartDate = new DateTime(2025, 10, 01),
+            //    EndDate = new DateTime(2025, 10, 12),
+            //    ReturnDate = null,
+            //    OriginalCost = 1500 * 11,
+            //    DiscountAmount = 0,
+            //    LateFeeAmount = 0,
+            //    FinalCost = 1500 * 11,
+            //    Status = "active",
+            //    VoucherId = null,
+            //    EmailSent = false
+            //},
+
+
+            //new EF.Tables.Rental
+            //{
+            //    VehicleId = context.Vehicles.FirstOrDefault(v => v.Brand == "Hyundai").Id,
+            //    CustomerId = context.Customers.FirstOrDefault(c => c.Email == "pranto@gmail.com").Id,
+            //    StartDate = new DateTime(2025, 06, 10),
+            //    EndDate = new DateTime(2025, 06, 15),
+            //    ReturnDate = new DateTime(2025, 06, 15),
+            //    OriginalCost = 480 * 5,
+            //    DiscountAmount = 0,
+            //    LateFeeAmount = 0,
+            //    FinalCost = 480 * 5,
+            //    Status = "completed",
+            //    VoucherId = null,
+            //    EmailSent = true
+            //},
+
+            //// 7️⃣ Completed rental — high-end Mercedes, no voucher, no discount
+            //new EF.Tables.Rental
+            //{
+            //    VehicleId = context.Vehicles.FirstOrDefault(v => v.Brand == "Mercedes").Id,
+            //    CustomerId = context.Customers.FirstOrDefault(c => c.Email == "toufiq@gmail.com").Id,
+            //    StartDate = new DateTime(2025, 05, 20),
+            //    EndDate = new DateTime(2025, 05, 24),
+            //    ReturnDate = new DateTime(2025, 05, 25), // returned late
+            //    OriginalCost = 1300 * 4,
+            //    DiscountAmount = 0,
+            //    LateFeeAmount = 1950, // 1-day late fee
+            //    FinalCost = (1300 * 4) + 1950,
+            //    Status = "completed",
+            //    VoucherId = null,
+            //    EmailSent = true
+            //},
+
+            //// 8️⃣ Cancelled booking
+            //new EF.Tables.Rental
+            //{
+            //    VehicleId = context.Vehicles.FirstOrDefault(v => v.Brand == "Chevrolet").Id,
+            //    CustomerId = context.Customers.FirstOrDefault(c => c.Email == "emma@example.com").Id,
+            //    StartDate = new DateTime(2025, 09, 02),
+            //    EndDate = new DateTime(2025, 09, 06),
+            //    ReturnDate = null,
+            //    OriginalCost = 520 * 4,
+            //    DiscountAmount = 0,
+            //    LateFeeAmount = 0,
+            //    FinalCost = 0,
+            //    Status = "cancelled",
+            //    VoucherId = null,
+            //    EmailSent = false
+            //},
+
+
+            //new EF.Tables.Rental
+            //{
+            //    VehicleId = context.Vehicles.FirstOrDefault(v => v.Brand == "Kia").Id,
+            //    CustomerId = context.Customers.FirstOrDefault(c => c.Email == "ali@example.com").Id,
+            //    StartDate = new DateTime(2025, 04, 10),
+            //    EndDate = new DateTime(2025, 04, 14),
+            //    ReturnDate = new DateTime(2025, 04, 14),
+            //    OriginalCost = 550 * 4,
+            //    DiscountAmount = 0,
+            //    LateFeeAmount = 0,
+            //    FinalCost = 550 * 4,
+            //    Status = "completed",
+            //    VoucherId = null,
+            //    EmailSent = true
+            //},
+
+
+            //new EF.Tables.Rental
+            //{
+            //    VehicleId = context.Vehicles.FirstOrDefault(v => v.Brand == "Nissan").Id,
+            //    CustomerId = context.Customers.FirstOrDefault(c => c.Email == "david@example.com").Id,
+            //    StartDate = new DateTime(2025, 08, 05),
+            //    EndDate = new DateTime(2025, 08, 10),
+            //    ReturnDate = new DateTime(2025, 08, 10),
+            //    OriginalCost = 600 * 5,
+            //    DiscountAmount = 0,
+            //    LateFeeAmount = 0,
+            //    FinalCost = 600 * 5,
+            //    Status = "completed",
+            //    VoucherId = null,
+            //    EmailSent = true
+            //}
+            //);
+
+            //context.SaveChanges();
+
         }
     }
 }

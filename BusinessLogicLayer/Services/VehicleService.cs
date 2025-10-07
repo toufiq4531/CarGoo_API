@@ -45,5 +45,21 @@ namespace BusinessLogicLayer.Services
             return DataAccessFactory.VehicleData().Delete(id);
         }
 
+        public static List<VehicleDTO> GetAvailableVehicles(DateTime start, DateTime end)
+        {
+            var AllVehicles = DataAccessFactory.VehicleData().Get();
+
+            var AllRentals = DataAccessFactory.RentalData().Get();
+
+            var RentedVehicleIds = AllRentals
+                .Where(r => r.StartDate >= end || r.EndDate <= start)
+                .Select(r => r.VehicleId)
+                .Distinct()
+                .ToList();
+            var availableVehicles = AllVehicles
+                .Where(v => !RentedVehicleIds.Contains(v.Id))
+                .ToList();
+            return GetMapper().Map<List<VehicleDTO>>(availableVehicles);
+        }
     }
 }

@@ -47,5 +47,6 @@ namespace DataAccessLayer.Repos
             RentalContext.Entry(existingVehicle).CurrentValues.SetValues(v);
             return RentalContext.SaveChanges() > 0;
         }
+
     }
 }
