@@ -95,5 +95,22 @@ namespace PresentationLayer.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("available/{start}/{end}")]
+        public HttpResponseMessage GetAvailableVehicles(DateTime start, DateTime end)
+        {
+            try
+            {
+                var data = VehicleService.GetAvailableVehicles(start, end);
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+
+
     }
 }

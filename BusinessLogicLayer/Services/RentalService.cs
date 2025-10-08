@@ -29,11 +29,13 @@ namespace BusinessLogicLayer.Services
             var data = DataAccessFactory.RentalData().Get(id);
             return GetMapper().Map<RentalDTO>(data);
         }
+
         //public static bool Create(RentalDTO rental) 
         //{
         //    var data = GetMapper().Map<Rental>(rental);
         //    return DataAccessFactory.RentalData().Create(data);
         //}
+
         public static bool Update(RentalDTO rental) 
         {
             var data = GetMapper().Map<Rental>(rental);
@@ -43,7 +45,6 @@ namespace BusinessLogicLayer.Services
         {
             return DataAccessFactory.RentalData().Delete(id);
         }
-
 
         public static double EstimateRentalCost(int VehicleId, DateTime Start, DateTime End)
         {
@@ -61,7 +62,7 @@ namespace BusinessLogicLayer.Services
 
             if (rentalDays > 7)
             {
-                estimatedCost *= 0.9;  // 10% discount
+                estimatedCost *= 0.9;
             }
             return estimatedCost;
         }
@@ -83,7 +84,7 @@ namespace BusinessLogicLayer.Services
             if (vehicle == null)
                 return -1;
 
-            double lateFee = lateDays * vehicle.DailyRate * 1.5; // 50% more than daily rate
+            double lateFee = lateDays * vehicle.DailyRate * 1.5; 
 
             return lateFee;
         }

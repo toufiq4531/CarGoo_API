@@ -46,5 +46,6 @@ namespace DataAccessLayer.Repos
         {
             return RentalContext.Rentals.Find(id);
         }
+
     }
 }

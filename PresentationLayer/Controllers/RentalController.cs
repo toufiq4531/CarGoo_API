@@ -94,5 +94,56 @@ namespace PresentationLayer.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("estimate/cost/{vehicleId}/{start}/{end}")]
+        public HttpResponseMessage EstimateRentalCost(int vehicleId, DateTime start, DateTime end)
+        {
+            try
+            {
+                var data = RentalService.EstimateRentalCost(vehicleId, start, end);
+                if (data == -1)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "Vehicle not found");
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("estimate/costvoucher/{vehicleId}/{start}/{end}/{voucherCode}")]
+        public HttpResponseMessage EstimateRentalCostVoucher(int vehicleId, DateTime start, DateTime end, string voucherCode)
+        {
+            try
+            {
+                var data = VoucherService.EstimateRentalCostVoucher(vehicleId, start, end, voucherCode);
+                if (data == -1)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "Vehicle not found");
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("estimate/latefee/{rentalId}/{actualReturnDate}")]
+        public HttpResponseMessage EstimateLateFee(int rentalId, DateTime actualReturnDate)
+        {
+            try
+            {
+                var data = RentalService.EstimateLateFee(rentalId, actualReturnDate);
+                if (data == -1)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "Rental or Vehicle not found");
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
     }
 }
