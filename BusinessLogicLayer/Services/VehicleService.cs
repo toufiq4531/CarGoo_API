@@ -48,18 +48,24 @@ namespace BusinessLogicLayer.Services
         public static List<VehicleDTO> GetAvailableVehicles(DateTime start, DateTime end)
         {
             var AllVehicles = DataAccessFactory.VehicleData().Get();
-
             var AllRentals = DataAccessFactory.RentalData().Get();
 
-            var RentedVehicleIds = AllRentals
-                .Where(r => r.StartDate >= end || r.EndDate <= start)
+            var ActiveRentals = AllRentals
+                .Where(r => r.Status == "active")
+                .ToList();
+
+            var OverlappingVehicles = ActiveRentals
+                .Where(r => r.StartDate < end && r.EndDate > start)
                 .Select(r => r.VehicleId)
                 .Distinct()
                 .ToList();
-            var availableVehicles = AllVehicles
-                .Where(v => !RentedVehicleIds.Contains(v.Id))
+
+            var AvailableVehicles = AllVehicles
+                .Where(v => !OverlappingVehicles.Contains(v.Id))
                 .ToList();
-            return GetMapper().Map<List<VehicleDTO>>(availableVehicles);
+
+            return GetMapper().Map<List<VehicleDTO>>(AvailableVehicles);
         }
+
     }
 }

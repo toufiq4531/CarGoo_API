@@ -110,7 +110,19 @@ namespace PresentationLayer.Controllers
             }
         }
 
-
-
+        [HttpGet]
+        [Route("popular")]
+        public HttpResponseMessage GetMostPopularVehicles()
+        {
+            try
+            {
+                var data = PopularVehicleService.GetMostPopularVehicles();
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
     }
 }

@@ -22,10 +22,10 @@ namespace DataAccessLayer
         {
             return new RentalRepo();
         }
-        public static IReportRepo ReportData()
-        {
-            return new ReportRepo();
-        }
+        //public static IReportRepo ReportData()
+        //{
+        //    return new ReportRepo();
+        //}
         public static IVoucherRepo VoucherData()
         {
             return new VoucherRepo();

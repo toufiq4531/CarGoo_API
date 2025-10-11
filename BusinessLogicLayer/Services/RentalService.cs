@@ -106,7 +106,7 @@ namespace BusinessLogicLayer.Services
 
                     string subject = $"Rental Confirmation #{data.Id}";
                     string body = $@"
-                        <h2>Thank you for renting with us, {customer.Name}!</h2>
+                        <h2>Thank you for renting with us, {customer.Name} Sir!</h2>
                         <p><strong>Vehicle:</strong> {vehicle.Brand} {vehicle.Model} ({vehicle.Year})</p>
                         <p><strong>Start Date:</strong> {data.StartDate:yyyy-MM-dd}</p>
                         <p><strong>End Date:</strong> {data.EndDate:yyyy-MM-dd}</p>
